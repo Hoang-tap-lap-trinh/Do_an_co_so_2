@@ -478,31 +478,6 @@ body {
     color: #f57f17;
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    background-color: #1e3c72;
-    color: white;
-    padding: 30px 0;
-    text-align: center;
-}
-
-.footer-links {
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: #ff7043;
-}
-
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     .hero-content {
