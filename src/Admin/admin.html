@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Thống kê</title>
+    <link rel="stylesheet" href="admin.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🏛️ Di tích Việt Nam</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Trang chủ</a></li>
+                <li><a href="../service/socialNetwork/social.html">Cộng đồng</a></li>
+                <li><a href="../service/location/service.html">Dịch vụ</a></li>
+                <li><a href="admin.html" class="active">Thống kê</a></li>
+                <li><a href="../service/contact/contact.html">Liên hệ</a></li>
+                <li><a href="#" id="logoutBtn">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Dashboard Section -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1>📊 Thống kê hoạt động quản trị</h1>
+                <p class="dashboard-subtitle">Tổng quan các chức năng quản lý hệ thống du lịch</p>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Tổng người dùng</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-info">
+                        <h3 id="totalPosts">0</h3>
+                        <p>Bài viết</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📍</div>
+                    <div class="stat-info">
+                        <h3 id="totalLocations">0</h3>
+                        <p>Địa điểm</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💬</div>
+                    <div class="stat-info">
+                        <h3 id="totalComments">0</h3>
+                        <p>Đánh giá</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-container">
+                <h2>Biểu đồ thống kê số lần sử dụng chức năng</h2>
+                <canvas id="activityChart"></canvas>
+            </div>
+
+            <!-- Data Table -->
+            <div class="data-table-container">
+                <h2>Chi tiết thống kê</h2>
+                <table class="data-table" id="statsTable">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Chức năng</th>
+                            <th>Số lần sử dụng</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dữ liệu sẽ được thêm bằng JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+// Import auth system
+const script = document.createElement('script');
+script.src = '../js/auth.js';
+document.head.appendChild(script);
+
+// Đợi auth.js load xong rồi kiểm tra quyền
+script.onload = function() {
+  // Kiểm tra quyền admin
+  if (!Auth.requireAdmin()) {
+    // Nếu không phải admin, hàm requireAdmin() sẽ tự động redirect
+    return;
+  }
+  
+  // Hiển thị thông tin admin đang đăng nhập
+  const user = Auth.getCurrentUser();
+  console.log('✅ Admin đang đăng nhập:', user.username);
+  
+  // Cập nhật tên admin trên dashboard
+  const dashboardHeader = document.querySelector('.dashboard-header h1');
+  if (dashboardHeader) {
+    dashboardHeader.innerHTML = `📊 Thống kê hoạt động quản trị<br>
+      <small style="font-size: 1rem; color: #666;">Xin chào, ${user.username}</small>`;
+  }
+};
+
+// Nếu auth.js không load được
+script.onerror = function() {
+  alert('⛔ Lỗi tải hệ thống xác thực!');
+  window.location.href = '../index.html';
+};
+
+
+// CẬP NHẬT XỬ LÝ ĐĂNG XUẤT
+document.getElementById('logoutBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  if (confirm('Bạn có chắc muốn đăng xuất?')) {
+    Auth.logout();
+    alert('Đăng xuất thành công!');
+    window.location.href = '../index.html';
+  }
+});
+        // Kiểm tra đăng nhập
+        const isLoggedIn = localStorage.getItem('isAdminLoggedIn');
+        if (!isLoggedIn || isLoggedIn !== 'true') {
+            alert('Bạn cần đăng nhập để truy cập trang này!');
+            window.location.href = 'login.html';
+        }
+
+        // Dữ liệu thống kê (random từ 50-300)
+        const statsData = [
+            { name: 'Quản lý mạng xã hội', value: Math.floor(Math.random() * 251) + 50, color: '#FF6384' },
+            { name: 'Giới thiệu', value: Math.floor(Math.random() * 251) + 50, color: '#36A2EB' },
+            { name: 'Quản lý lịch hẹn', value: Math.floor(Math.random() * 251) + 50, color: '#FFCE56' },
+            { name: 'Quản lý địa điểm du lịch', value: Math.floor(Math.random() * 251) + 50, color: '#4BC0C0' },
+            { name: 'Quản lý bài viết/tin tức', value: Math.floor(Math.random() * 251) + 50, color: '#9966FF' },
+            { name: 'Quản lý bình luận/đánh giá', value: Math.floor(Math.random() * 251) + 50, color: '#FF9F40' },
+            { name: 'Xem thống kê người dùng', value: Math.floor(Math.random() * 251) + 50, color: '#FF6384' }
+        ];
+
+        // Cập nhật summary cards
+        document.getElementById('totalUsers').textContent = statsData[6].value;
+        document.getElementById('totalPosts').textContent = statsData[4].value;
+        document.getElementById('totalLocations').textContent = statsData[3].value;
+        document.getElementById('totalComments').textContent = statsData[5].value;
+
+        // Tạo biểu đồ cột
+        const ctx = document.getElementById('activityChart').getContext('2d');
+        const activityChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: statsData.map(item => item.name),
+                datasets: [{
+                    label: 'Số lần sử dụng',
+                    data: statsData.map(item => item.value),
+                    backgroundColor: statsData.map(item => item.color),
+                    borderColor: statsData.map(item => item.color),
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y + ' lần';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 50
+                        }
+                    }
+                }
+            }
+        });
+
+        // Điền dữ liệu vào bảng
+        const tableBody = document.querySelector('#statsTable tbody');
+        statsData.forEach((item, index) => {
+            const row = tableBody.insertRow();
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${item.name}</td>
+                <td><strong>${item.value}</strong></td>
+                <td><span class="status-badge ${item.value > 150 ? 'status-active' : 'status-normal'}">
+                    ${item.value > 150 ? 'Hoạt động tốt' : 'Bình thường'}
+                </span></td>
+            `;
+        });
+
+        // Xử lý đăng xuất
+        document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                localStorage.removeItem('isAdminLoggedIn');
+                alert('Đăng xuất thành công!');
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

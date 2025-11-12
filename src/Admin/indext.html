@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Di tích Mỹ Sơn - Quảng Nam</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🏛️ Di tích Việt Nam</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active">Trang chủ</a></li>
+                <li><a href="#community">Cộng đồng</a></li>
+                <li><a href="#services">Dịch vụ</a></li>
+                <!-- Menu Thống kê sẽ được thêm động khi admin đăng nhập -->
+                <li id="adminMenuItem" style="display: none;">
+                    <a href="admin.html">Thống kê</a>
+                </li>
+                <li><a href="#contact">Liên hệ</a></li>
+                <li><a href="login.html" id="loginBtn">Đăng nhập</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Di tích Mỹ Sơn<br>(Quảng Nam)</h1>
+                <p>Khám phá thánh địa Chăm Pa cổ kính, nơi các tháp gạch đỏ thấm kê chuyện xưa.</p>
+                <p>Cần thân nhẹ, lạc vào mê cung lịch sử là mê luôn đấy!</p>
+                <button class="btn-primary" onclick="window.location.href='#gallery'">See more</button>
+            </div>
+            
+            <!-- Image Gallery Carousel -->
+            <div class="image-gallery">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400" alt="Hội An">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=400" alt="Cổng thành">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=400" alt="Di tích">
+                </div>
+            </div>
+            
+            <!-- Carousel Controls -->
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="changeSlide(-1)">❮</button>
+                <button class="carousel-btn" onclick="changeSlide(1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="gallery" class="features-section">
+        <div class="container">
+            <h2>Khám phá thêm</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=400" alt="Tour">
+                    <h3>Tour du lịch</h3>
+                    <p>Trải nghiệm các tour tham quan di tích lịch sử độc đáo</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400" alt="Văn hóa">
+                    <h3>Văn hóa Chăm</h3>
+                    <p>Tìm hiểu nền văn hóa Chăm Pa ngàn năm lịch sử</p>
+                </div>
+                <div class="feature-card">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400" alt="Hướng dẫn">
+                    <h3>Hướng dẫn viên</h3>
+                    <p>Đội ngũ hướng dẫn chuyên nghiệp, am hiểu lịch sử</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Di tích Mỹ Sơn - Quảng Nam. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Chính sách</a>
+                <a href="#terms">Điều khoản</a>
+                <a href="#contact">Liên hệ</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
