@@ -106,7 +106,6 @@ function startAutoSlide() {
     }, 5000); // Tự động chuyển slide sau 5 giây
 }
 
-// Bạn có thể bỏ comment dòng này nếu muốn tự động chuyển slide
 // startAutoSlide();
 
 // ===== SMOOTH SCROLLING =====
