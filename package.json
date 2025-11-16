@@ -1,0 +1,31 @@
+{
+    "name": "do_an_co_so_2",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Hoang-tap-lap-trinh/Do_an_co_so_2.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Hoang-tap-lap-trinh/Do_an_co_so_2/issues"
+    },
+    "homepage": "https://github.com/Hoang-tap-lap-trinh/Do_an_co_so_2#readme",
+    "description": "",
+    "devDependencies": {
+        "@vituum/vite-plugin-posthtml": "^1.1.0",
+        "posthtml-doctype": "^1.1.1",
+        "posthtml-include": "^2.0.1",
+        "sass": "^1.86.3",
+        "vite": "^7.2.2",
+        "vite-plugin-posthtml": "^0.0.3"
+    }
+}
